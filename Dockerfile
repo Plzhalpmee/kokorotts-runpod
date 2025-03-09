@@ -9,7 +9,6 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 # 复制应用代码
-COPY handler.py .
 COPY requirements.txt .
 
 # 安装Python依赖
@@ -29,7 +28,7 @@ RUN python -c "from kokoro import KPipeline; \
 
 # 设置环境变量
 ENV PYTHONUNBUFFERED=1
-ENV RUNPOD_DEBUG_MODE=1
 
+COPY . .
 # 设置入口点
 CMD ["python", "-u", "handler.py"]
