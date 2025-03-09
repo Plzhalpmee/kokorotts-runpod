@@ -1,0 +1,9 @@
+{
+    "input": {
+      "text": "今天天气真不错啊,适合出去玩哈哈哈哈,好开心嘿嘿",
+      "voice": "zf_001",
+      "language": "zh",
+      "speed": 1.0,
+      "split_sentences": true
+    }
+}

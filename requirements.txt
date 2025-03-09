@@ -1,0 +1,5 @@
+runpod
+kokoro>=0.8.2
+soundfile
+numpy
+misaki[en,zh]
