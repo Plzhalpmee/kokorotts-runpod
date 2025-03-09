@@ -5,7 +5,10 @@ import numpy as np
 import soundfile as sf
 from kokoro import KModel,KPipeline
 import tempfile
-
+import uuid
+import tempfile
+from pydub import AudioSegment
+import io
 import torch
 
 # 支持的语言代码映射
@@ -96,11 +99,16 @@ def handler(job):
         with tempfile.NamedTemporaryFile(suffix=".wav", delete=False) as temp_file:
             temp_path = temp_file.name
             sf.write(temp_path, combined_audio, 24000)
+
         
-        # 读取音频文件并转换为 base64
-        with open(temp_path, "rb") as audio_file:
-            audio_data = audio_file.read()
-            audio_base64 = base64.b64encode(audio_data).decode("utf-8")
+         # 将 WAV 转换为 MP3
+        wav_audio = AudioSegment.from_wav(temp_path)
+        mp3_io = io.BytesIO()
+        wav_audio.export(mp3_io, format="mp3", bitrate="192k")
+        mp3_data = mp3_io.getvalue()
+        
+        # 将 MP3 数据转换为 base64
+        audio_base64 = base64.b64encode(mp3_data).decode("utf-8")
         
         # 删除临时文件
         os.unlink(temp_path)
