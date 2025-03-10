@@ -31,8 +31,7 @@ REPO_ID = 'hexgrad/Kokoro-82M-v1.1-zh'
 def get_pipeline(lang_code):
     device = 'cuda' if torch.cuda.is_available() else 'cpu'
     model = KModel(repo_id=REPO_ID).to(device).eval()
-    if lang_code not in pipelines:
-        code = LANGUAGE_MAP.get(lang_code, "z")  # 默认回退到中文
+    code = LANGUAGE_MAP.get(lang_code, "z")  # 默认回退到中文
     pipelines[lang_code] = KPipeline(lang_code=code,repo_id="hexgrad/Kokoro-82M-v1.1-zh",model=model,device=device)
     return pipelines[lang_code]
 
@@ -121,7 +120,9 @@ def handler(job):
     
     except Exception as e:
         return {"error": f"处理请求时出错: {str(e)}"}
-
+def adjust_concurrency(current_concurrency):
+    return 20
+    
 # 启动 RunPod Serverless
 if __name__=="__main__":
-    runpod.serverless.start({"handler": handler,"concurrency_modifier": 20})
+    runpod.serverless.start({"handler": handler,"concurrency_modifier": adjust_concurrency})

@@ -77,7 +77,6 @@ print(response.json())
   "error": "处理请求时出错: 无效的声音ID"
 }
 ```
-
 ## 支持的语言
 
 | 语言 | 代码 | 内部代码 | 备注 |
@@ -92,7 +91,8 @@ print(response.json())
 | 巴西葡萄牙语 | pt-br | p | - |
 | 中文 | zh | z | 需要 misaki[zh] |
 
-## 可用声音
+## v1.0可用声音
+REPO_ID = 'hexgrad/Kokoro-82M' handler.py文件默认为hexgrad/Kokoro-82M-v1.1-zh
 
 ### 美式英语 (en-us, lang_code='a')
 
@@ -144,6 +144,34 @@ print(response.json())
 | zm_yunxi | 🚹 | D | dbe6e1ce |
 | zm_yunxia | 🚹 | D | bb2b03b0 |
 | zm_yunyang | 🚹 | D | 5238ac22 |
+
+## v1.1-zh 版本支持的语言
+REPO_ID = 'hexgrad/Kokoro-82M-v1.1-zh' handler.py文件默认为hexgrad/Kokoro-82M-v1.1-zh
+
+| 语言 | 代码 | 内部代码 | 备注 |
+|------|------|----------|------|
+| 美式英语 | en-us | a | 使用 misaki[en] |
+| 英式英语 | en-gb | b | 使用 misaki[en] |
+| 中文 | zh | z | 需要 misaki[zh] |
+
+## v1.1-zh 版本支持的声音
+
+### 英语声音 (v1.1-zh)
+
+| 声音 ID | 特征 | 描述 |
+|---------|------|------|
+| af_maple | 🚺 | 美国女性，1小时训练数据 |
+| af_sol | 🚺 | 美国女性，1小时训练数据 |
+| bf_vale | 🚺 | 年长的英国女性，1小时训练数据 |
+
+### 中文声音 (v1.1-zh)
+
+v1.1-zh 版本支持 100 个中文声音，命名规则如下：
+
+- **女性声音**：`zf_001` 到 `zf_050`
+- **男性声音**：`zm_001` 到 `zm_050`
+
+这些声音来自专业数据集，质量较高。
 
 ## 完整客户端示例
 
