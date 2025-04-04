@@ -2,34 +2,34 @@ FROM python:3.10-slim
 
 WORKDIR /app
 
-# 安装系统依赖
+# Install system dependencies
 RUN apt-get update && apt-get install -y \
     espeak-ng \
     libsndfile1 \
     ffmpeg \
     && rm -rf /var/lib/apt/lists/*
 
-# 复制应用代码
+# Copy application code
 COPY requirements.txt .
 
-# 安装Python依赖
+# Install Python dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# 预下载和预缓存模型
+# Pre-download and pre-cache model
 RUN python -c "from kokoro import KModel; \
     model = KModel(repo_id='hexgrad/Kokoro-82M-v1.1-zh'); \
-    print('模型已成功预加载')"
+    print('Model preloaded successfully')"
 
-# 预加载所有支持的语言管道
+# Preload all supported language pipelines
 RUN python -c "from kokoro import KPipeline; \
     en_pipeline = KPipeline(lang_code='a', repo_id='hexgrad/Kokoro-82M-v1.1-zh'); \
-    print('英语管道已加载'); \
+    print('English pipeline loaded'); \
     zh_pipeline = KPipeline(lang_code='z', repo_id='hexgrad/Kokoro-82M-v1.1-zh'); \
-    print('中文管道已加载')"
+    print('Chinese pipeline loaded')"
 
-# 设置环境变量
+# Set environment variables
 ENV PYTHONUNBUFFERED=1
 
 COPY . .
-# 设置入口点
+# Set entry point
 CMD ["python", "-u", "handler.py"]
