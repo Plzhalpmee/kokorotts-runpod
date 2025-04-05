@@ -26,7 +26,7 @@ LANGUAGE_MAP = {
 
 # Store pipelines for different languages
 pipelines = {}
-REPO_ID = 'hexgrad/Kokoro-82M-v1.1-zh'
+REPO_ID = 'hexgrad/Kokoro-82M'
 
 
 # Get or create language pipeline
@@ -34,7 +34,7 @@ def get_pipeline(lang_code):
     device = 'cuda' if torch.cuda.is_available() else 'cpu'
     model = KModel(repo_id=REPO_ID).to(device).eval()
     code = LANGUAGE_MAP.get(lang_code, "a")  # Default fallback to American English
-    pipelines[lang_code] = KPipeline(lang_code=code, repo_id="hexgrad/Kokoro-82M-v1.1-zh", model=model, device=device)
+    pipelines[lang_code] = KPipeline(lang_code=code, repo_id="hexgrad/Kokoro-82M", model=model, device=device)
     return pipelines[lang_code]
 
 
