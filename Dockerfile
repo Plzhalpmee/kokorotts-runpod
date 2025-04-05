@@ -23,9 +23,10 @@ RUN python -c "from kokoro import KModel; \
 # Preload all supported language pipelines
 RUN python -c "from kokoro import KPipeline; \
     en_pipeline = KPipeline(lang_code='a', repo_id='hexgrad/Kokoro-82M-v1.1-zh'); \
-    print('English pipeline loaded'); \
-    zh_pipeline = KPipeline(lang_code='z', repo_id='hexgrad/Kokoro-82M-v1.1-zh'); \
-    print('Chinese pipeline loaded')"
+    print('English pipeline loaded')"
+
+# zh_pipeline = KPipeline(lang_code='z', repo_id='hexgrad/Kokoro-82M-v1.1-zh'); \
+# print('Chinese pipeline loaded')
 
 # Set environment variables
 ENV PYTHONUNBUFFERED=1
