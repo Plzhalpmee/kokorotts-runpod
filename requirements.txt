@@ -5,3 +5,4 @@ numpy
 misaki[en,zh]
 pydub
 ffmpeg-python
+torch
